@@ -44,7 +44,7 @@ A comprehensive AI-powered financial health assessment platform for Small and Me
 - FastAPI (REST API)
 - PostgreSQL (Database)
 - SQLAlchemy (ORM)
-- Google Gemini 2.0 Flash (AI/LLM)
+- Google Gemini 2.0 Flash / Chat GPT5 (AI/LLM)
 - Pandas (Data Processing)
 
 **Frontend:**
