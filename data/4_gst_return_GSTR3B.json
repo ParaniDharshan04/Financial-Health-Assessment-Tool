@@ -1,0 +1,104 @@
+{
+  "gstin": "29ABCDE1234F1Z5",
+  "return_period": "042024",
+  "return_type": "GSTR-3B",
+  "filing_date": "2024-05-20",
+  "legal_name": "Tech Solutions Pvt Ltd",
+  "outward_supplies": {
+    "taxable_supplies": {
+      "taxable_value": 2830508.47,
+      "igst": 305084.75,
+      "cgst": 57203.39,
+      "sgst": 57203.39,
+      "cess": 0
+    },
+    "zero_rated_supplies": {
+      "taxable_value": 500000,
+      "igst": 0,
+      "cgst": 0,
+      "sgst": 0
+    },
+    "exempted_supplies": {
+      "taxable_value": 0,
+      "igst": 0,
+      "cgst": 0,
+      "sgst": 0
+    }
+  },
+  "inward_supplies": {
+    "imports": {
+      "taxable_value": 200000,
+      "igst": 36000,
+      "cess": 0
+    },
+    "inward_supplies_liable_to_reverse_charge": {
+      "taxable_value": 0,
+      "igst": 0,
+      "cgst": 0,
+      "sgst": 0
+    },
+    "other_itc": {
+      "inputs": {
+        "igst": 120000,
+        "cgst": 45000,
+        "sgst": 45000,
+        "cess": 0
+      },
+      "capital_goods": {
+        "igst": 18000,
+        "cgst": 9000,
+        "sgst": 9000,
+        "cess": 0
+      },
+      "input_services": {
+        "igst": 24000,
+        "cgst": 12000,
+        "sgst": 12000,
+        "cess": 0
+      }
+    }
+  },
+  "itc_claimed": {
+    "igst": 198000,
+    "cgst": 66000,
+    "sgst": 66000,
+    "cess": 0,
+    "total": 330000
+  },
+  "itc_reversed": {
+    "igst": 5000,
+    "cgst": 2000,
+    "sgst": 2000,
+    "cess": 0,
+    "total": 9000,
+    "reason": "Rule 42 - Personal use"
+  },
+  "net_itc": {
+    "igst": 193000,
+    "cgst": 64000,
+    "sgst": 64000,
+    "cess": 0,
+    "total": 321000
+  },
+  "tax_payable": {
+    "igst": 112084.75,
+    "cgst": 0,
+    "sgst": 0,
+    "cess": 0,
+    "interest": 0,
+    "late_fee": 0,
+    "total": 112084.75
+  },
+  "tax_paid": {
+    "igst": 112084.75,
+    "cgst": 0,
+    "sgst": 0,
+    "cess": 0,
+    "interest": 0,
+    "late_fee": 0,
+    "total": 112084.75,
+    "payment_mode": "Electronic Cash Ledger",
+    "payment_date": "2024-05-20",
+    "challan_number": "CH-2024-5678"
+  }
+}

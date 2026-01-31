@@ -1,0 +1,10 @@
+Section,Description,Amount,Eligible,Document_Available,Claimed,Financial_Year
+80C,Employee Provident Fund,150000,Yes,Yes,Yes,2024-25
+80C,Life Insurance Premium,50000,Yes,Yes,Yes,2024-25
+80C,Public Provident Fund,100000,Yes,Yes,Yes,2024-25
+80D,Health Insurance Premium,25000,Yes,Yes,Yes,2024-25
+80D,Preventive Health Checkup,5000,Yes,Yes,Yes,2024-25
+80E,Education Loan Interest,45000,Yes,Yes,Yes,2024-25
+80G,Charitable Donations,30000,Yes,Yes,No,2024-25
+80TTA,Savings Account Interest,8000,Yes,Yes,Yes,2024-25
+24B,Home Loan Interest,200000,Yes,Yes,Yes,2024-25

@@ -1,0 +1,81 @@
+{
+  "gstin": "29ABCDE1234F1Z5",
+  "return_period": "042024",
+  "return_type": "GSTR-1",
+  "filing_date": "2024-05-10",
+  "legal_name": "Tech Solutions Pvt Ltd",
+  "trade_name": "Tech Solutions",
+  "b2b_invoices": [
+    {
+      "invoice_number": "INV-2024-001",
+      "invoice_date": "2024-04-05",
+      "buyer_gstin": "27XYZAB5678C1Z9",
+      "buyer_name": "ABC Enterprises",
+      "invoice_value": 500000,
+      "taxable_value": 423728.81,
+      "igst": 76271.19,
+      "cgst": 0,
+      "sgst": 0,
+      "place_of_supply": "Maharashtra",
+      "reverse_charge": "N"
+    },
+    {
+      "invoice_number": "INV-2024-002",
+      "invoice_date": "2024-04-12",
+      "buyer_gstin": "29PQRST9012D1Z3",
+      "buyer_name": "XYZ Industries",
+      "invoice_value": 750000,
+      "taxable_value": 635593.22,
+      "igst": 0,
+      "cgst": 57203.39,
+      "sgst": 57203.39,
+      "place_of_supply": "Karnataka",
+      "reverse_charge": "N"
+    },
+    {
+      "invoice_number": "INV-2024-003",
+      "invoice_date": "2024-04-18",
+      "buyer_gstin": "06LMNOP3456E1Z7",
+      "buyer_name": "Tech Solutions Ltd",
+      "invoice_value": 1200000,
+      "taxable_value": 1016949.15,
+      "igst": 183050.85,
+      "cgst": 0,
+      "sgst": 0,
+      "place_of_supply": "Haryana",
+      "reverse_charge": "N"
+    }
+  ],
+  "b2c_large": [
+    {
+      "invoice_number": "B2C-2024-101",
+      "invoice_date": "2024-04-20",
+      "invoice_value": 300000,
+      "taxable_value": 254237.29,
+      "igst": 45762.71,
+      "place_of_supply": "Tamil Nadu"
+    }
+  ],
+  "exports": [
+    {
+      "invoice_number": "EXP-2024-001",
+      "invoice_date": "2024-04-25",
+      "invoice_value": 500000,
+      "taxable_value": 500000,
+      "igst": 0,
+      "export_type": "WPAY",
+      "shipping_bill_number": "SB-2024-12345",
+      "shipping_bill_date": "2024-04-26",
+      "port_code": "INBLR4"
+    }
+  ],
+  "summary": {
+    "total_taxable_value": 2830508.47,
+    "total_igst": 305084.75,
+    "total_cgst": 57203.39,
+    "total_sgst": 57203.39,
+    "total_tax": 419491.53,
+    "total_invoice_value": 3250000,
+    "number_of_invoices": 5
+  }
+}

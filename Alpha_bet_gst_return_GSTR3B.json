@@ -1,0 +1,64 @@
+{
+  "gstin": "29ABCDE1234F1Z5",
+  "return_period": "012025",
+  "return_type": "GSTR-3B",
+  "filing_date": "2025-01-20",
+  "legal_name": "Alpha bet",
+  "outward_supplies": {
+    "taxable_supplies": {
+      "taxable_value": 2500000,
+      "igst": 150000,
+      "cgst": 75000,
+      "sgst": 75000,
+      "cess": 0
+    },
+    "zero_rated_supplies": {
+      "taxable_value": 500000,
+      "igst": 0,
+      "cgst": 0,
+      "sgst": 0
+    }
+  },
+  "inward_supplies": {
+    "imports": {
+      "taxable_value": 200000,
+      "igst": 36000,
+      "cess": 0
+    }
+  },
+  "itc_claimed": {
+    "igst": 120000,
+    "cgst": 45000,
+    "sgst": 45000,
+    "cess": 0,
+    "total": 210000
+  },
+  "itc_reversed": {
+    "igst": 5000,
+    "cgst": 2000,
+    "sgst": 2000,
+    "total": 9000,
+    "reason": "Rule 42 - Personal use"
+  },
+  "net_itc": {
+    "igst": 115000,
+    "cgst": 43000,
+    "sgst": 43000,
+    "total": 201000
+  },
+  "tax_payable": {
+    "igst": 35000,
+    "cgst": 32000,
+    "sgst": 32000,
+    "total": 99000
+  },
+  "tax_paid": {
+    "igst": 35000,
+    "cgst": 32000,
+    "sgst": 32000,
+    "total": 99000,
+    "payment_mode": "Electronic Cash Ledger",
+    "payment_date": "2025-01-20",
+    "challan_number": "CH-2025-1234"
+  }
+}
