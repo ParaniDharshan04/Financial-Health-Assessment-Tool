@@ -180,12 +180,12 @@ export default function Banking() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Connect Bank Section */}
-        <div className="glass-card p-6 mb-6">
-          <h2 className="text-xl font-semibold text-white mb-4">{t('connectBankAccount')}</h2>
+        <div className="metric-card mb-6">
+          <h2 className="text-lg font-semibold text-white mb-4">{t('connectBankAccount')}</h2>
           
           {bankStatus?.is_connected ? (
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 glass-card-dark rounded-2xl">
+              <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
                 <div>
                   <p className="text-green-400 font-semibold">✓ Connected</p>
                   <p className="text-gray-300 text-sm">{bankStatus.institution_name}</p>
@@ -200,14 +200,14 @@ export default function Banking() {
                   disabled={loading}
                   className="flex items-center gap-2 px-4 py-2 bg-red-500/20 text-red-300 rounded-lg hover:bg-red-500/30 transition-colors"
                 >
-                  <XCircle size={20} />
+                  <XCircle size={18} />
                   Disconnect
                 </button>
               </div>
             </div>
           ) : (
             <div className="space-y-4">
-              <p className="text-gray-300 mb-4">
+              <p className="text-gray-300 mb-4 text-sm">
                 {t('connectBankDesc')}
               </p>
               <button
@@ -227,7 +227,7 @@ export default function Banking() {
                   </>
                 )}
               </button>
-              <p className="text-sm text-gray-400 mt-3">
+              <p className="text-xs text-gray-400 mt-3">
                 {t('poweredByPlaid')}
               </p>
             </div>
@@ -235,50 +235,50 @@ export default function Banking() {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <button
             onClick={fetchAccounts}
-            className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition text-left"
+            className="metric-card hover:scale-105 transition-transform text-left"
           >
-            <DollarSign className="text-green-600 mb-3" size={32} />
-            <h3 className="text-lg font-semibold text-gray-900">{t('viewAccounts')}</h3>
-            <p className="text-sm text-gray-600 mt-1">{t('checkAccountBalances')}</p>
+            <DollarSign className="text-green-400 mb-3" size={24} />
+            <h3 className="text-sm font-semibold text-white">{t('viewAccounts')}</h3>
+            <p className="text-xs text-gray-400 mt-1">{t('checkAccountBalances')}</p>
           </button>
 
           <button
             onClick={fetchTransactions}
-            className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition text-left"
+            className="metric-card hover:scale-105 transition-transform text-left"
           >
-            <TrendingUp className="text-blue-600 mb-3" size={32} />
-            <h3 className="text-lg font-semibold text-gray-900">{t('transactions')}</h3>
-            <p className="text-sm text-gray-600 mt-1">{t('viewRecentTransactions')}</p>
+            <TrendingUp className="text-green-400 mb-3" size={24} />
+            <h3 className="text-sm font-semibold text-white">{t('transactions')}</h3>
+            <p className="text-xs text-gray-400 mt-1">{t('viewRecentTransactions')}</p>
           </button>
 
-          <div className="bg-white p-6 rounded-lg shadow">
-            <RefreshCw className="text-purple-600 mb-3" size={32} />
-            <h3 className="text-lg font-semibold text-gray-900">{t('autoSync')}</h3>
-            <p className="text-sm text-gray-600 mt-1">{t('automaticDailyUpdates')}</p>
+          <div className="metric-card">
+            <RefreshCw className="text-green-400 mb-3" size={24} />
+            <h3 className="text-sm font-semibold text-white">{t('autoSync')}</h3>
+            <p className="text-xs text-gray-400 mt-1">{t('automaticDailyUpdates')}</p>
           </div>
         </div>
 
         {/* Connected Accounts */}
         {accounts.length > 0 && (
-          <div className="bg-white rounded-lg shadow p-6 mb-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('connectedAccounts')}</h2>
+          <div className="metric-card mb-6">
+            <h2 className="text-lg font-semibold text-white mb-4">{t('connectedAccounts')}</h2>
             <div className="space-y-3">
               {accounts.map((account, index) => (
-                <div key={index} className="flex justify-between items-center p-4 border border-gray-200 rounded-lg">
+                <div key={index} className="flex justify-between items-center p-4 bg-white/5 border border-white/10 rounded-xl">
                   <div>
-                    <h3 className="font-semibold text-gray-900">{account.name}</h3>
-                    <p className="text-sm text-gray-600">{account.type}</p>
+                    <h3 className="font-semibold text-white">{account.name}</h3>
+                    <p className="text-sm text-gray-400">{account.type}</p>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-bold text-gray-900">
+                    <div className="text-lg font-bold text-white">
                       ${typeof account.balance === 'object' 
                         ? (account.balance?.current || account.balance?.available || 0).toLocaleString()
                         : (account.balance || 0).toLocaleString()}
                     </div>
-                    <p className="text-xs text-gray-500">{account.currency || 'USD'}</p>
+                    <p className="text-xs text-gray-400">{account.currency || 'USD'}</p>
                   </div>
                 </div>
               ))}
@@ -288,16 +288,16 @@ export default function Banking() {
 
         {/* Recent Transactions */}
         {transactions.length > 0 && (
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('recentTransactions')}</h2>
+          <div className="metric-card">
+            <h2 className="text-lg font-semibold text-white mb-4">{t('recentTransactions')}</h2>
             <div className="space-y-2">
               {transactions.slice(0, 10).map((transaction, index) => (
-                <div key={index} className="flex justify-between items-center p-3 border-b border-gray-100">
+                <div key={index} className="flex justify-between items-center p-3 border-b border-white/10">
                   <div>
-                    <p className="font-medium text-gray-900">{transaction.name}</p>
-                    <p className="text-sm text-gray-600">{transaction.date}</p>
+                    <p className="font-medium text-white text-sm">{transaction.name}</p>
+                    <p className="text-xs text-gray-400">{transaction.date}</p>
                   </div>
-                  <div className={`font-semibold ${transaction.amount < 0 ? 'text-red-600' : 'text-green-600'}`}>
+                  <div className={`font-semibold ${transaction.amount < 0 ? 'text-red-400' : 'text-green-400'}`}>
                     ${Math.abs(transaction.amount).toFixed(2)}
                   </div>
                 </div>
@@ -305,14 +305,6 @@ export default function Banking() {
             </div>
           </div>
         )}
-
-        {/* Demo Notice */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mt-6">
-          <h3 className="font-semibold text-blue-900 mb-2">{t('demoModeActive')}</h3>
-          <p className="text-sm text-blue-700">
-            {t('demoModeBankingDesc')}
-          </p>
-        </div>
       </main>
     </div>
   )

@@ -39,7 +39,7 @@ export default function Register() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="max-w-md w-full glass-card p-8 animate-fadeInUp">
+      <div className="max-w-md w-full metric-card animate-fadeInUp">
         <h2 className="text-3xl font-bold text-center gradient-text-neon mb-8">
           Create Account
         </h2>
@@ -116,7 +116,7 @@ export default function Register() {
 
         <p className="mt-6 text-center text-sm text-gray-400">
           Already have an account?{' '}
-          <Link to="/login" className="text-blue-400 hover:text-blue-300 font-medium">
+          <Link to="/login" className="text-green-400 hover:text-green-300 font-medium">
             Login
           </Link>
         </p>

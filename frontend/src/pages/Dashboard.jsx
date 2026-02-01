@@ -80,89 +80,119 @@ export default function Dashboard() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Metric Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 animate-fadeInUp">
+          <div className="metric-card">
+            <div className="flex justify-between items-start mb-3">
+              <div>
+                <p className="text-sm text-gray-400 mb-2">{t('totalAnalyses')}</p>
+                <p className="text-3xl font-bold text-white">{analyses.length}</p>
+              </div>
+              <TrendingUp size={28} className="text-purple-400" />
+            </div>
+            <div className="sparkline-container">
+              <div className="h-8 flex items-end gap-1">
+                {[40, 60, 45, 70, 55, 80, 65].map((height, i) => (
+                  <div key={i} className="flex-1 bg-green-400/30 rounded-t" style={{height: `${height}%`}}></div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="metric-card">
+            <div className="flex justify-between items-start mb-3">
+              <div>
+                <p className="text-sm text-gray-400 mb-2">{t('taxComplianceStatus')}</p>
+                <p className="text-3xl font-bold text-blue-400">{t('active')}</p>
+              </div>
+              <FileCheck size={28} className="text-blue-400" />
+            </div>
+            <div className="sparkline-container">
+              <div className="h-8 flex items-end gap-1">
+                {[70, 75, 80, 78, 85, 88, 90].map((height, i) => (
+                  <div key={i} className="flex-1 bg-green-400/30 rounded-t" style={{height: `${height}%`}}></div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="metric-card">
+            <div className="flex justify-between items-start mb-3">
+              <div>
+                <p className="text-sm text-gray-400 mb-2">{t('bankingStatus')}</p>
+                <p className="text-3xl font-bold text-cyan-400">{t('ready')}</p>
+              </div>
+              <Building2 size={28} className="text-cyan-400" />
+            </div>
+            <div className="sparkline-container">
+              <div className="h-8 flex items-end gap-1">
+                {[50, 55, 60, 58, 65, 70, 75].map((height, i) => (
+                  <div key={i} className="flex-1 bg-green-400/30 rounded-t" style={{height: `${height}%`}}></div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="metric-card">
+            <div className="flex justify-between items-start mb-3">
+              <div>
+                <p className="text-sm text-gray-400 mb-2">{t('gstReturns')}</p>
+                <p className="text-3xl font-bold text-white">3</p>
+              </div>
+              <Receipt size={28} className="text-indigo-400" />
+            </div>
+            <div className="sparkline-container">
+              <div className="h-8 flex items-end gap-1">
+                {[60, 65, 70, 68, 75, 80, 85].map((height, i) => (
+                  <div key={i} className="flex-1 bg-green-400/30 rounded-t" style={{height: `${height}%`}}></div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 animate-fadeInUp">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <button
             onClick={() => navigate('/upload')}
-            className="feature-card text-white p-6 flex items-center gap-4 neon-blue"
+            className="metric-card hover:scale-105 transition-transform text-left"
           >
-            <Upload size={32} className="text-blue-400" />
-            <div className="text-left">
-              <h3 className="text-lg font-semibold">{t('uploadData')}</h3>
-              <p className="text-sm text-gray-300">{t('uploadDataDesc')}</p>
-            </div>
+            <Upload size={32} className="text-purple-400 mb-3" />
+            <h3 className="text-base font-semibold text-white">{t('uploadData')}</h3>
+            <p className="text-sm text-gray-400 mt-2">{t('uploadDataDesc')}</p>
           </button>
 
           <button
             onClick={() => navigate('/tax-compliance')}
-            className="feature-card text-white p-6 flex items-center gap-4 neon-purple"
+            className="metric-card hover:scale-105 transition-transform text-left"
           >
-            <FileCheck size={32} className="text-green-400" />
-            <div className="text-left">
-              <h3 className="text-lg font-semibold">{t('taxCompliance')}</h3>
-              <p className="text-sm text-gray-300">{t('taxComplianceDesc')}</p>
-            </div>
+            <FileCheck size={32} className="text-blue-400 mb-3" />
+            <h3 className="text-base font-semibold text-white">{t('taxCompliance')}</h3>
+            <p className="text-sm text-gray-400 mt-2">{t('taxComplianceDesc')}</p>
           </button>
 
           <button
             onClick={() => navigate('/gst')}
-            className="feature-card text-white p-6 flex items-center gap-4 neon-pink"
+            className="metric-card hover:scale-105 transition-transform text-left"
           >
-            <Receipt size={32} className="text-purple-400" />
-            <div className="text-left">
-              <h3 className="text-lg font-semibold">{t('gstReturns')}</h3>
-              <p className="text-sm text-gray-300">{t('gstReturnsDesc')}</p>
-            </div>
+            <Receipt size={32} className="text-indigo-400 mb-3" />
+            <h3 className="text-base font-semibold text-white">{t('gstReturns')}</h3>
+            <p className="text-sm text-gray-400 mt-2">{t('gstReturnsDesc')}</p>
           </button>
 
           <button
             onClick={() => navigate('/banking')}
-            className="feature-card text-white p-6 flex items-center gap-4 neon-blue"
+            className="metric-card hover:scale-105 transition-transform text-left"
           >
-            <Building2 size={32} className="text-indigo-400" />
-            <div className="text-left">
-              <h3 className="text-lg font-semibold">{t('banking')}</h3>
-              <p className="text-sm text-gray-300">{t('bankingDesc')}</p>
-            </div>
+            <Building2 size={32} className="text-cyan-400 mb-3" />
+            <h3 className="text-base font-semibold text-white">{t('banking')}</h3>
+            <p className="text-sm text-gray-400 mt-2">{t('bankingDesc')}</p>
           </button>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="stat-card-glow">
-            <div className="flex items-center gap-4">
-              <TrendingUp size={32} className="text-blue-400" />
-              <div>
-                <h3 className="text-sm text-gray-400">{t('totalAnalyses')}</h3>
-                <p className="text-3xl font-bold text-white">{analyses.length}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="stat-card-glow">
-            <div className="flex items-center gap-4">
-              <FileCheck size={32} className="text-green-400" />
-              <div>
-                <h3 className="text-sm text-gray-400">{t('taxComplianceStatus')}</h3>
-                <p className="text-2xl font-bold text-green-400">{t('active')}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="stat-card-glow">
-            <div className="flex items-center gap-4">
-              <Building2 size={32} className="text-purple-400" />
-              <div>
-                <h3 className="text-sm text-gray-400">{t('bankingStatus')}</h3>
-                <p className="text-2xl font-bold text-purple-400">{t('ready')}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Recent Analyses */}
-        <div className="glass-card">
-          <div className="px-6 py-4 border-b border-white/10">
+        <div className="metric-card" data-section="analyses">
+          <div className="mb-4">
             <h2 className="text-xl font-semibold text-white">{t('recentAnalyses')}</h2>
           </div>
 
@@ -177,12 +207,12 @@ export default function Dashboard() {
               <p>{t('noAnalyses')}</p>
             </div>
           ) : (
-            <div className="divide-y divide-white/10">
+            <div className="space-y-3">
               {analyses.map((analysis) => (
                 <div
                   key={analysis.id}
                   onClick={() => navigate(`/analysis/${analysis.id}`)}
-                  className="p-6 hover:bg-white/5 cursor-pointer transition"
+                  className="p-5 bg-white/5 rounded-xl hover:bg-white/10 cursor-pointer transition border border-white/10"
                 >
                   <div className="flex justify-between items-center">
                     <div>
@@ -190,10 +220,10 @@ export default function Dashboard() {
                         <span className={`text-3xl font-bold ${getScoreColor(analysis.health_score)}`}>
                           {analysis.health_score}
                         </span>
-                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                          analysis.risk_band === 'Safe' ? 'score-badge-safe' :
-                          analysis.risk_band === 'Watch' ? 'score-badge-watch' :
-                          'score-badge-critical'
+                        <span className={`px-3 py-1.5 rounded-lg text-sm font-medium ${
+                          analysis.risk_band === 'Safe' ? 'bg-green-500/20 text-green-400' :
+                          analysis.risk_band === 'Watch' ? 'bg-yellow-500/20 text-yellow-400' :
+                          'bg-red-500/20 text-red-400'
                         }`}>
                           {translateRiskBand(analysis.risk_band)}
                         </span>
@@ -201,12 +231,12 @@ export default function Dashboard() {
                       <p className="text-sm text-gray-400">
                         {new Date(analysis.created_at).toLocaleDateString('en-US', {
                           year: 'numeric',
-                          month: 'long',
+                          month: 'short',
                           day: 'numeric'
                         })}
                       </p>
                     </div>
-                    <button className="text-blue-400 hover:text-blue-300 font-medium">
+                    <button className="text-purple-400 hover:text-purple-300 text-base font-medium">
                       {t('viewDetails')} →
                     </button>
                   </div>

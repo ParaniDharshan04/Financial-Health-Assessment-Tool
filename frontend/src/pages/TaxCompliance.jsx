@@ -217,14 +217,14 @@ export default function TaxCompliance() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Tabs */}
-        <div className="glass-card mb-6">
+        <div className="metric-card mb-6">
           <div className="border-b border-white/10">
             <nav className="flex -mb-px">
               <button
                 onClick={() => setActiveTab('overview')}
-                className={`px-6 py-3 border-b-2 font-medium text-sm transition-colors ${
+                className={`px-4 py-2 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === 'overview'
-                    ? 'border-blue-500 text-blue-400'
+                    ? 'border-green-500 text-green-400'
                     : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600'
                 }`}
               >
@@ -232,9 +232,9 @@ export default function TaxCompliance() {
               </button>
               <button
                 onClick={() => setActiveTab('deductions')}
-                className={`px-6 py-3 border-b-2 font-medium text-sm transition-colors ${
+                className={`px-4 py-2 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === 'deductions'
-                    ? 'border-blue-500 text-blue-400'
+                    ? 'border-green-500 text-green-400'
                     : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600'
                 }`}
               >
@@ -242,9 +242,9 @@ export default function TaxCompliance() {
               </button>
               <button
                 onClick={() => setActiveTab('filing')}
-                className={`px-6 py-3 border-b-2 font-medium text-sm transition-colors ${
+                className={`px-4 py-2 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === 'filing'
-                    ? 'border-blue-500 text-blue-400'
+                    ? 'border-green-500 text-green-400'
                     : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600'
                 }`}
               >
@@ -325,14 +325,14 @@ export default function TaxCompliance() {
         {/* Tax Deductions Tab */}
         {activeTab === 'deductions' && (
           <div className="space-y-6">
-            <div className="glass-card p-6">
+            <div className="metric-card">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-semibold text-white">{t('taxDeductions')}</h2>
+                <h2 className="text-lg font-semibold text-white">{t('taxDeductions')}</h2>
                 <button 
                   onClick={() => setShowAddDeduction(true)}
                   className="btn-neon flex items-center gap-2"
                 >
-                  <Upload size={20} />
+                  <Upload size={18} />
                   {t('addDeduction')}
                 </button>
               </div>
@@ -344,16 +344,16 @@ export default function TaxCompliance() {
                   <p className="text-sm text-gray-500 mt-2">Click "Add Deduction" to start tracking your tax deductions</p>
                 </div>
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {deductions.map((deduction, index) => (
                     <div key={index} className="border border-white/10 rounded-lg p-4 bg-white/5">
                       <div className="flex justify-between items-start">
                         <div>
-                          <h3 className="font-semibold text-white">{deduction.section}</h3>
-                          <p className="text-sm text-gray-400 mt-1">{deduction.description}</p>
+                          <h3 className="font-semibold text-white text-sm">{deduction.section}</h3>
+                          <p className="text-xs text-gray-400 mt-1">{deduction.description}</p>
                         </div>
                         <div className="text-right">
-                          <div className="text-lg font-bold text-white">
+                          <div className="text-base font-bold text-white">
                             ₹{deduction.amount.toLocaleString()}
                           </div>
                           <span className={`text-xs px-2 py-1 rounded ${
@@ -370,26 +370,26 @@ export default function TaxCompliance() {
             </div>
 
             {/* Deduction Summary */}
-            <div className="glass-card p-6">
-              <h2 className="text-xl font-semibold text-white mb-4">Deduction Summary</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="p-4 bg-blue-500/20 rounded-lg border border-blue-400/30">
-                  <div className="text-2xl font-bold text-blue-400">
+            <div className="metric-card">
+              <h2 className="text-lg font-semibold text-white mb-4">Deduction Summary</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div className="p-3 bg-green-500/20 rounded-lg border border-green-400/30">
+                  <div className="text-xl font-bold text-green-400">
                     ₹{deductions.reduce((sum, d) => sum + d.amount, 0).toLocaleString()}
                   </div>
-                  <div className="text-sm text-gray-400 mt-1">Total Deductions</div>
+                  <div className="text-xs text-gray-400 mt-1">Total Deductions</div>
                 </div>
-                <div className="p-4 bg-green-500/20 rounded-lg border border-green-400/30">
-                  <div className="text-2xl font-bold text-green-400">
+                <div className="p-3 bg-green-500/20 rounded-lg border border-green-400/30">
+                  <div className="text-xl font-bold text-green-400">
                     {deductions.filter(d => d.is_eligible).length}
                   </div>
-                  <div className="text-sm text-gray-400 mt-1">Eligible Deductions</div>
+                  <div className="text-xs text-gray-400 mt-1">Eligible Deductions</div>
                 </div>
-                <div className="p-4 bg-purple-500/20 rounded-lg border border-purple-400/30">
-                  <div className="text-2xl font-bold text-purple-400">
+                <div className="p-3 bg-green-500/20 rounded-lg border border-green-400/30">
+                  <div className="text-xl font-bold text-green-400">
                     ₹{(deductions.reduce((sum, d) => sum + d.amount, 0) * 0.3).toLocaleString()}
                   </div>
-                  <div className="text-sm text-gray-400 mt-1">Estimated Tax Savings</div>
+                  <div className="text-xs text-gray-400 mt-1">Estimated Tax Savings</div>
                 </div>
               </div>
             </div>

@@ -194,40 +194,40 @@ export default function Analysis() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Health Score Overview */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 animate-fadeInUp">
-          <div className="lg:col-span-2 glass-card p-6">
-            <h2 className="text-xl font-semibold text-white mb-4">{t('financialHealthScore')}</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6 animate-fadeInUp">
+          <div className="lg:col-span-2 metric-card">
+            <h2 className="text-lg font-semibold text-white mb-4">{t('financialHealthScore')}</h2>
             <div className="flex items-center gap-6">
               <div className="text-center">
-                <div className={`text-6xl font-bold ${getScoreColor(analysis.health_score)} text-glow`}>
+                <div className={`text-5xl font-bold ${getScoreColor(analysis.health_score)} text-glow`}>
                   {analysis.health_score}
                 </div>
-                <div className="text-gray-400 mt-2">{t('outOf100')}</div>
+                <div className="text-gray-400 mt-2 text-sm">{t('outOf100')}</div>
               </div>
               <div className="flex-1">
-                <div className={`inline-block px-4 py-2 rounded-full text-lg font-semibold mb-4 ${
-                  analysis.risk_band === 'Safe' ? 'score-badge-safe' :
-                  analysis.risk_band === 'Watch' ? 'score-badge-watch' :
-                  'score-badge-critical'
+                <div className={`inline-block px-3 py-1 rounded-lg text-sm font-semibold mb-3 ${
+                  analysis.risk_band === 'Safe' ? 'bg-green-500/20 text-green-400' :
+                  analysis.risk_band === 'Watch' ? 'bg-yellow-500/20 text-yellow-400' :
+                  'bg-red-500/20 text-red-400'
                 }`}>
                   {t(analysis.risk_band.toLowerCase())}
                 </div>
-                <p className="text-gray-300">
+                <p className="text-gray-300 text-sm">
                   {analysis.ai_insights?.summary || 'Analysis complete'}
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="glass-card p-6">
-            <h3 className="text-lg font-semibold text-white mb-4">{t('scoreDistribution')}</h3>
+          <div className="metric-card">
+            <h3 className="text-sm font-semibold text-white mb-4">{t('scoreDistribution')}</h3>
             <Doughnut data={healthScoreData} options={{ maintainAspectRatio: true }} />
           </div>
         </div>
 
         {/* Component Scores */}
-        <div className="glass-card p-6 mb-8">
-          <h2 className="text-xl font-semibold text-white mb-4">{t('componentScores')}</h2>
+        <div className="metric-card mb-6">
+          <h2 className="text-lg font-semibold text-white mb-4">{t('componentScores')}</h2>
           <Bar
             data={componentScoresData}
             options={{
@@ -252,15 +252,15 @@ export default function Analysis() {
         </div>
 
         {/* Key Metrics */}
-        <div className="glass-card p-6 mb-8">
-          <h2 className="text-xl font-semibold text-white mb-4">{t('keyFinancialMetrics')}</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="metric-card mb-6">
+          <h2 className="text-lg font-semibold text-white mb-4">{t('keyFinancialMetrics')}</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {Object.entries(analysis.metrics).slice(0, 8).map(([key, value]) => (
-              <div key={key} className="glass-card-dark p-4 hover:scale-105 transition-transform">
-                <div className="text-sm text-gray-400 mb-1">
+              <div key={key} className="p-3 bg-white/5 rounded-xl hover:scale-105 transition-transform border border-white/10">
+                <div className="text-xs text-gray-400 mb-1">
                   {key.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
                 </div>
-                <div className="text-2xl font-bold text-white">
+                <div className="text-xl font-bold text-white">
                   {typeof value === 'number' ? value.toFixed(2) : value}
                 </div>
               </div>
@@ -269,30 +269,30 @@ export default function Analysis() {
         </div>
 
         {/* Recommendations */}
-        <div className="glass-card p-6 mb-8">
-          <h2 className="text-xl font-semibold text-white mb-4">{t('recommendations')}</h2>
-          <div className="space-y-4">
+        <div className="metric-card mb-6">
+          <h2 className="text-lg font-semibold text-white mb-4">{t('recommendations')}</h2>
+          <div className="space-y-3">
             {analysis.recommendations?.map((rec, index) => (
-              <div key={index} className="glass-card-dark p-4 rounded-2xl border-l-4 border-blue-500">
+              <div key={index} className="p-4 bg-white/5 rounded-xl border-l-4 border-green-500">
                 <div className="flex items-start gap-3">
                   <div className={`mt-1 ${rec.priority === 'High' ? 'text-red-400' : 'text-yellow-400'}`}>
-                    <AlertCircle size={20} />
+                    <AlertCircle size={18} />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
-                      <h3 className="font-semibold text-white">{rec.title}</h3>
+                      <h3 className="font-semibold text-white text-sm">{rec.title}</h3>
                       <span className={`text-xs px-2 py-1 rounded ${
                         rec.priority === 'High' ? 'bg-red-500/20 text-red-300' : 'bg-yellow-500/20 text-yellow-300'
                       }`}>
                         {t(rec.priority.toLowerCase())} {t('priority')}
                       </span>
                     </div>
-                    <p className="text-gray-300 mb-2">{rec.description}</p>
+                    <p className="text-gray-300 text-sm mb-2">{rec.description}</p>
                     {rec.actions && (
                       <ul className="space-y-1">
                         {rec.actions.map((action, i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm text-gray-400">
-                            <CheckCircle size={16} className="mt-0.5 text-green-400" />
+                          <li key={i} className="flex items-start gap-2 text-xs text-gray-400">
+                            <CheckCircle size={14} className="mt-0.5 text-green-400" />
                             {action}
                           </li>
                         ))}

@@ -240,8 +240,8 @@ export default function GSTManagement() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Upload Section */}
-        <div className="glass-card p-6 mb-6">
-          <h2 className="text-xl font-semibold text-white mb-4">{t('uploadGSTReturn')}</h2>
+        <div className="metric-card mb-6">
+          <h2 className="text-lg font-semibold text-white mb-4">{t('uploadGSTReturn')}</h2>
           
           <div className="space-y-4">
             <div>
@@ -282,38 +282,38 @@ export default function GSTManagement() {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <button
             onClick={checkCompliance}
             disabled={loading}
-            className="glass-card p-6 hover:bg-white/10 transition text-left disabled:opacity-50"
+            className="metric-card hover:scale-105 transition-transform text-left disabled:opacity-50"
           >
-            <CheckCircle className="text-green-400 mb-3" size={32} />
-            <h3 className="text-lg font-semibold text-white">Check Compliance</h3>
-            <p className="text-sm text-gray-400 mt-1">Verify your GST compliance status and get recommendations</p>
+            <CheckCircle className="text-green-400 mb-3" size={24} />
+            <h3 className="text-sm font-semibold text-white">Check Compliance</h3>
+            <p className="text-xs text-gray-400 mt-1">Verify your GST compliance status and get recommendations</p>
           </button>
 
           <button
             onClick={() => setShowLiabilityModal(true)}
             disabled={loading}
-            className="glass-card p-6 hover:bg-white/10 transition text-left disabled:opacity-50"
+            className="metric-card hover:scale-105 transition-transform text-left disabled:opacity-50"
           >
-            <FileText className="text-blue-400 mb-3" size={32} />
-            <h3 className="text-lg font-semibold text-white">Calculate GST Liability</h3>
-            <p className="text-sm text-gray-400 mt-1">Calculate how much GST you need to pay</p>
+            <FileText className="text-green-400 mb-3" size={24} />
+            <h3 className="text-sm font-semibold text-white">Calculate GST Liability</h3>
+            <p className="text-xs text-gray-400 mt-1">Calculate how much GST you need to pay</p>
           </button>
         </div>
 
         {/* GST Data Display */}
         {gstData && (
-          <div className="glass-card p-6 mb-6">
-            <h2 className="text-xl font-semibold text-white mb-4">{t('gstInformation')}</h2>
+          <div className="metric-card mb-6">
+            <h2 className="text-lg font-semibold text-white mb-4">{t('gstInformation')}</h2>
             <div className="space-y-4">
               {gstData.message && (
-                <div className="p-4 bg-blue-500/20 border border-blue-400/30 rounded-lg">
+                <div className="p-4 bg-green-500/20 border border-green-400/30 rounded-lg">
                   <div className="flex items-center gap-2">
-                    <CheckCircle className="text-blue-400" size={20} />
-                    <span className="font-semibold text-white">
+                    <CheckCircle className="text-green-400" size={18} />
+                    <span className="font-semibold text-white text-sm">
                       {gstData.message}
                     </span>
                   </div>
@@ -321,14 +321,14 @@ export default function GSTManagement() {
               )}
               
               {gstData.data && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="p-4 bg-white/5 rounded-lg border border-white/10">
-                    <div className="text-sm text-gray-400">GSTIN</div>
-                    <div className="text-lg font-semibold text-white">{gstData.data.gstin || 'N/A'}</div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="p-3 bg-white/5 rounded-lg border border-white/10">
+                    <div className="text-xs text-gray-400">GSTIN</div>
+                    <div className="text-base font-semibold text-white">{gstData.data.gstin || 'N/A'}</div>
                   </div>
-                  <div className="p-4 bg-white/5 rounded-lg border border-white/10">
-                    <div className="text-sm text-gray-400">Status</div>
-                    <div className="text-lg font-semibold text-green-400">Active</div>
+                  <div className="p-3 bg-white/5 rounded-lg border border-white/10">
+                    <div className="text-xs text-gray-400">Status</div>
+                    <div className="text-base font-semibold text-green-400">Active</div>
                   </div>
                 </div>
               )}
@@ -338,39 +338,39 @@ export default function GSTManagement() {
 
         {/* Compliance Report */}
         {complianceData && (
-          <div className="glass-card p-6 mb-6">
-            <h2 className="text-xl font-semibold text-white mb-4">GST Compliance Report</h2>
+          <div className="metric-card mb-6">
+            <h2 className="text-lg font-semibold text-white mb-4">GST Compliance Report</h2>
             
             {/* Score Card */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
               <div className="p-4 bg-gradient-to-br from-green-500/20 to-green-600/20 rounded-lg border border-green-400/30">
                 <div className="text-3xl font-bold text-green-400">{complianceData.score}/100</div>
-                <div className="text-sm text-gray-300 mt-1">Compliance Score</div>
+                <div className="text-xs text-gray-300 mt-1">Compliance Score</div>
               </div>
               <div className="p-4 bg-white/5 rounded-lg border border-white/10">
-                <div className="text-2xl font-bold text-white">{complianceData.status}</div>
-                <div className="text-sm text-gray-400 mt-1">Overall Status</div>
+                <div className="text-xl font-bold text-white">{complianceData.status}</div>
+                <div className="text-xs text-gray-400 mt-1">Overall Status</div>
               </div>
               <div className="p-4 bg-white/5 rounded-lg border border-white/10">
-                <div className="text-2xl font-bold text-white">{complianceData.gstin}</div>
-                <div className="text-sm text-gray-400 mt-1">GSTIN</div>
+                <div className="text-xl font-bold text-white">{complianceData.gstin}</div>
+                <div className="text-xs text-gray-400 mt-1">GSTIN</div>
               </div>
             </div>
 
             {/* Compliance Checks */}
-            <div className="space-y-3 mb-6">
-              <h3 className="text-lg font-semibold text-white mb-3">Compliance Checks</h3>
+            <div className="space-y-2 mb-6">
+              <h3 className="text-sm font-semibold text-white mb-3">Compliance Checks</h3>
               {complianceData.checks.map((check, index) => (
-                <div key={index} className={`p-4 rounded-lg border ${
+                <div key={index} className={`p-3 rounded-lg border text-sm ${
                   check.status === 'pass' ? 'bg-green-500/10 border-green-400/30' :
                   check.status === 'warning' ? 'bg-yellow-500/10 border-yellow-400/30' :
                   'bg-red-500/10 border-red-400/30'
                 }`}>
-                  <div className="flex items-start gap-3">
-                    <span className="text-2xl">{check.icon}</span>
+                  <div className="flex items-start gap-2">
+                    <span className="text-lg">{check.icon}</span>
                     <div className="flex-1">
-                      <h4 className="font-semibold text-white">{check.name}</h4>
-                      <p className="text-sm text-gray-300 mt-1">{check.message}</p>
+                      <h4 className="font-semibold text-white text-sm">{check.name}</h4>
+                      <p className="text-xs text-gray-300 mt-1">{check.message}</p>
                     </div>
                   </div>
                 </div>
@@ -379,12 +379,12 @@ export default function GSTManagement() {
 
             {/* Recommendations */}
             <div>
-              <h3 className="text-lg font-semibold text-white mb-3">Recommendations</h3>
+              <h3 className="text-sm font-semibold text-white mb-3">Recommendations</h3>
               <div className="space-y-2">
                 {complianceData.recommendations.map((rec, index) => (
-                  <div key={index} className="flex items-start gap-2 p-3 bg-blue-500/10 rounded-lg border border-blue-400/30">
-                    <span className="text-blue-400 mt-0.5">💡</span>
-                    <span className="text-sm text-gray-300">{rec}</span>
+                  <div key={index} className="flex items-start gap-2 p-3 bg-green-500/10 rounded-lg border border-green-400/30">
+                    <span className="text-green-400 mt-0.5">💡</span>
+                    <span className="text-xs text-gray-300">{rec}</span>
                   </div>
                 ))}
               </div>
@@ -394,48 +394,48 @@ export default function GSTManagement() {
 
         {/* GST Liability Result */}
         {liabilityData && (
-          <div className="glass-card p-6 mb-6">
-            <h2 className="text-xl font-semibold text-white mb-4">GST Liability Calculation</h2>
+          <div className="metric-card mb-6">
+            <h2 className="text-lg font-semibold text-white mb-4">GST Liability Calculation</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <div className="p-4 bg-white/5 rounded-lg border border-white/10">
-                <div className="text-sm text-gray-400">Taxable Value</div>
-                <div className="text-2xl font-bold text-white">₹{liabilityData.taxable_value.toLocaleString()}</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+              <div className="p-3 bg-white/5 rounded-lg border border-white/10">
+                <div className="text-xs text-gray-400">Taxable Value</div>
+                <div className="text-xl font-bold text-white">₹{liabilityData.taxable_value.toLocaleString()}</div>
               </div>
-              <div className="p-4 bg-white/5 rounded-lg border border-white/10">
-                <div className="text-sm text-gray-400">GST Rate</div>
-                <div className="text-2xl font-bold text-white">{liabilityData.gst_rate}%</div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              <div className="p-4 bg-blue-500/20 rounded-lg border border-blue-400/30">
-                <div className="text-sm text-gray-400">CGST</div>
-                <div className="text-xl font-bold text-blue-400">₹{liabilityData.cgst.toLocaleString()}</div>
-              </div>
-              <div className="p-4 bg-purple-500/20 rounded-lg border border-purple-400/30">
-                <div className="text-sm text-gray-400">SGST</div>
-                <div className="text-xl font-bold text-purple-400">₹{liabilityData.sgst.toLocaleString()}</div>
-              </div>
-              <div className="p-4 bg-green-500/20 rounded-lg border border-green-400/30">
-                <div className="text-sm text-gray-400">IGST</div>
-                <div className="text-xl font-bold text-green-400">₹{liabilityData.igst.toLocaleString()}</div>
+              <div className="p-3 bg-white/5 rounded-lg border border-white/10">
+                <div className="text-xs text-gray-400">GST Rate</div>
+                <div className="text-xl font-bold text-white">{liabilityData.gst_rate}%</div>
               </div>
             </div>
 
-            <div className="p-6 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-lg border border-orange-400/30">
-              <div className="text-sm text-gray-300 mb-2">Total GST Liability</div>
-              <div className="text-4xl font-bold text-white">₹{liabilityData.total_gst.toLocaleString()}</div>
-              <div className="text-sm text-gray-400 mt-2">Total Value with GST: ₹{liabilityData.total_value_with_gst.toLocaleString()}</div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+              <div className="p-3 bg-green-500/20 rounded-lg border border-green-400/30">
+                <div className="text-xs text-gray-400">CGST</div>
+                <div className="text-lg font-bold text-green-400">₹{liabilityData.cgst.toLocaleString()}</div>
+              </div>
+              <div className="p-3 bg-green-500/20 rounded-lg border border-green-400/30">
+                <div className="text-xs text-gray-400">SGST</div>
+                <div className="text-lg font-bold text-green-400">₹{liabilityData.sgst.toLocaleString()}</div>
+              </div>
+              <div className="p-3 bg-green-500/20 rounded-lg border border-green-400/30">
+                <div className="text-xs text-gray-400">IGST</div>
+                <div className="text-lg font-bold text-green-400">₹{liabilityData.igst.toLocaleString()}</div>
+              </div>
+            </div>
+
+            <div className="p-4 bg-gradient-to-br from-green-500/20 to-green-600/20 rounded-lg border border-green-400/30">
+              <div className="text-xs text-gray-300 mb-2">Total GST Liability</div>
+              <div className="text-3xl font-bold text-white">₹{liabilityData.total_gst.toLocaleString()}</div>
+              <div className="text-xs text-gray-400 mt-2">Total Value with GST: ₹{liabilityData.total_value_with_gst.toLocaleString()}</div>
             </div>
           </div>
         )}
 
         {/* GST Info Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-          <div className="glass-card p-6">
-            <h3 className="font-semibold text-white mb-2">{t('gstRates')}</h3>
-            <div className="space-y-2 text-sm">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+          <div className="metric-card">
+            <h3 className="font-semibold text-white mb-2 text-sm">{t('gstRates')}</h3>
+            <div className="space-y-2 text-xs">
               <div className="flex justify-between">
                 <span className="text-gray-400">{t('standardRate')}:</span>
                 <span className="font-semibold text-white">18%</span>
@@ -451,9 +451,9 @@ export default function GSTManagement() {
             </div>
           </div>
 
-          <div className="glass-card p-6">
-            <h3 className="font-semibold text-white mb-2">{t('filingCalendar')}</h3>
-            <div className="space-y-2 text-sm">
+          <div className="metric-card">
+            <h3 className="font-semibold text-white mb-2 text-sm">{t('filingCalendar')}</h3>
+            <div className="space-y-2 text-xs">
               <div className="flex justify-between">
                 <span className="text-gray-400">GSTR-1:</span>
                 <span className="font-semibold text-white">11th of next month</span>
@@ -465,9 +465,9 @@ export default function GSTManagement() {
             </div>
           </div>
 
-          <div className="glass-card p-6">
-            <h3 className="font-semibold text-white mb-2">Upload Instructions</h3>
-            <p className="text-sm text-gray-400">
+          <div className="metric-card">
+            <h3 className="font-semibold text-white mb-2 text-sm">Upload Instructions</h3>
+            <p className="text-xs text-gray-400">
               Upload GSTR-1 or GSTR-3B returns in JSON format for analysis
             </p>
           </div>

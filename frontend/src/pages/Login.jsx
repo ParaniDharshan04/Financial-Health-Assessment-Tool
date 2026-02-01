@@ -27,7 +27,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="max-w-md w-full glass-card p-8 animate-fadeInUp">
+      <div className="max-w-md w-full metric-card animate-fadeInUp">
         <h2 className="text-3xl font-bold text-center gradient-text-neon mb-8">
           SME Financial Health
         </h2>
@@ -76,7 +76,7 @@ export default function Login() {
 
         <p className="mt-6 text-center text-sm text-gray-400">
           Don't have an account?{' '}
-          <Link to="/register" className="text-blue-400 hover:text-blue-300 font-medium">
+          <Link to="/register" className="text-green-400 hover:text-green-300 font-medium">
             Register
           </Link>
         </p>

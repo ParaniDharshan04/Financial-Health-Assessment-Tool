@@ -19,14 +19,15 @@ export default function LanguageSelector() {
 
   return (
     <div className="flex items-center gap-2">
-      <Globe size={18} className="text-gray-600" />
+      <Globe size={18} className="text-gray-300" />
       <select
         value={i18n.language}
         onChange={handleLanguageChange}
-        className="px-3 py-1 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        className="input-glass px-3 py-2 text-sm cursor-pointer"
+        style={{ colorScheme: 'dark' }}
       >
         {languages.map((lang) => (
-          <option key={lang.code} value={lang.code}>
+          <option key={lang.code} value={lang.code} style={{backgroundColor: '#1e293b', color: '#fff'}}>
             {lang.flag} {lang.name}
           </option>
         ))}

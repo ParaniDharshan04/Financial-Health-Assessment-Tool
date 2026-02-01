@@ -112,7 +112,7 @@ export default function Upload() {
       </header>
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="glass-card p-8">
+        <div className="metric-card p-8">
           {error && (
             <div className="bg-red-500/20 border border-red-500/50 text-red-300 px-4 py-3 rounded-2xl mb-6">
               {error}
@@ -139,11 +139,11 @@ export default function Upload() {
               <label className="block text-sm font-medium text-gray-300 mb-2">
                 Upload File (CSV or XLSX)
               </label>
-              <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-white/20 border-dashed rounded-2xl hover:border-blue-400/50 transition glass-card-dark">
+              <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-white/20 border-dashed rounded-2xl hover:border-green-400/50 transition glass-card-dark">
                 <div className="space-y-1 text-center">
                   <FileSpreadsheet className="mx-auto h-12 w-12 text-gray-400" />
                   <div className="flex text-sm text-gray-400">
-                    <label className="relative cursor-pointer rounded-md font-medium text-blue-400 hover:text-blue-300">
+                    <label className="relative cursor-pointer rounded-md font-medium text-green-400 hover:text-green-300">
                       <span>Upload a file</span>
                       <input
                         type="file"
@@ -164,8 +164,8 @@ export default function Upload() {
               </div>
             </div>
 
-            <div className="glass-card-dark p-4 rounded-2xl border border-blue-500/30">
-              <h3 className="text-sm font-medium text-blue-300 mb-2">File Requirements:</h3>
+            <div className="glass-card-dark p-4 rounded-2xl border border-green-500/30">
+              <h3 className="text-sm font-medium text-green-300 mb-2">File Requirements:</h3>
               <ul className="text-sm text-gray-400 space-y-1 list-disc list-inside">
                 <li>File format: CSV, XLSX, or PDF</li>
                 <li>Include column headers (for CSV/XLSX)</li>
@@ -195,7 +195,7 @@ export default function Upload() {
         </div>
 
         {/* Sample Data Info */}
-        <div className="mt-8 glass-card p-6">
+        <div className="mt-8 metric-card">
           <h3 className="text-lg font-semibold text-white mb-4">Sample Data Format</h3>
           <div className="overflow-x-auto">
             <table className="min-w-full text-sm">
