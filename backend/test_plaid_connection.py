@@ -1,59 +1,35 @@
-"""
-Test Plaid API connection and credentials
-Run this to diagnose Plaid configuration issues
-"""
-
 import os
 from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
 
-print("=" * 50)
-print("PLAID CONNECTION TEST")
-print("=" * 50)
-print()
+# Get Plaid credentials
+client_id = os.getenv('PLAID_CLIENT_ID', '').strip()
+secret = os.getenv('PLAID_SECRET', '').strip()
+env = os.getenv('PLAID_ENV', 'https://sandbox.plaid.com').strip()
 
-# Check environment variables
-print("1. Checking environment variables...")
-client_id = os.getenv('PLAID_CLIENT_ID', '')
-secret = os.getenv('PLAID_SECRET', '')
-env = os.getenv('PLAID_ENV', 'https://sandbox.plaid.com')
+print("=" * 60)
+print("PLAID CONFIGURATION TEST")
+print("=" * 60)
+print(f"Client ID: {client_id[:10]}... (length: {len(client_id)})")
+print(f"Secret: {secret[:10]}... (length: {len(secret)})")
+print(f"Environment: {env}")
+print(f"Is Configured: {bool(client_id and secret and len(client_id) > 10)}")
+print("=" * 60)
 
-print(f"   PLAID_CLIENT_ID: {'✓ Set' if client_id else '✗ Missing'} ({client_id[:10]}... if set)")
-print(f"   PLAID_SECRET: {'✓ Set' if secret else '✗ Missing'} ({secret[:10]}... if set)")
-print(f"   PLAID_ENV: {env}")
-print()
-
-if not client_id or not secret:
-    print("❌ ERROR: Plaid credentials not configured!")
-    print("   Please add to backend/.env:")
-    print("   PLAID_CLIENT_ID=your_client_id")
-    print("   PLAID_SECRET=your_secret")
-    print("   PLAID_ENV=https://sandbox.plaid.com")
-    exit(1)
-
-# Try importing Plaid
-print("2. Checking Plaid SDK installation...")
+# Try to import and configure Plaid
 try:
-    import plaid
     from plaid.api import plaid_api
     from plaid.model.link_token_create_request import LinkTokenCreateRequest
     from plaid.model.link_token_create_request_user import LinkTokenCreateRequestUser
     from plaid.model.products import Products
     from plaid.model.country_code import CountryCode
     from plaid import ApiClient, Configuration
-    print("   ✓ Plaid SDK imported successfully")
-    print(f"   Plaid version: {plaid.__version__ if hasattr(plaid, '__version__') else 'Unknown'}")
-except ImportError as e:
-    print(f"   ✗ Failed to import Plaid SDK: {e}")
-    print("   Run: pip install plaid-python")
-    exit(1)
-print()
-
-# Try creating Plaid client
-print("3. Creating Plaid API client...")
-try:
+    
+    print("\n✅ Plaid library imported successfully")
+    
+    # Configure Plaid client
     configuration = Configuration(
         host=env,
         api_key={
@@ -61,17 +37,14 @@ try:
             'secret': secret,
         }
     )
+    
     api_client = ApiClient(configuration)
     client = plaid_api.PlaidApi(api_client)
-    print("   ✓ Plaid client created successfully")
-except Exception as e:
-    print(f"   ✗ Failed to create client: {e}")
-    exit(1)
-print()
-
-# Try creating link token
-print("4. Testing link token creation...")
-try:
+    
+    print("✅ Plaid client configured successfully")
+    
+    # Try to create a test link token
+    print("\n🔄 Testing link token creation...")
     request = LinkTokenCreateRequest(
         user=LinkTokenCreateRequestUser(
             client_user_id="test_user_123"
@@ -83,30 +56,25 @@ try:
     )
     
     response = client.link_token_create(request)
-    link_token = response['link_token']
+    print(f"✅ Link token created successfully!")
+    print(f"   Token: {response['link_token'][:20]}...")
+    print(f"   Expiration: {response['expiration']}")
+    print("\n" + "=" * 60)
+    print("✅ PLAID IS WORKING CORRECTLY!")
+    print("=" * 60)
     
-    print("   ✓ Link token created successfully!")
-    print(f"   Link token: {link_token[:20]}...")
-    print(f"   Expiration: {response.get('expiration', 'N/A')}")
-    print()
-    print("=" * 50)
-    print("✅ SUCCESS! Plaid is configured correctly!")
-    print("=" * 50)
+except ImportError as e:
+    print(f"\n❌ Error importing Plaid library: {e}")
+    print("   Run: pip install plaid-python")
     
 except Exception as e:
-    print(f"   ✗ Failed to create link token")
-    print(f"   Error: {str(e)}")
-    print()
-    print("=" * 50)
-    print("❌ FAILED! Plaid configuration issue")
-    print("=" * 50)
-    print()
-    print("Possible causes:")
-    print("1. Invalid credentials - Check your Plaid dashboard")
-    print("2. Incorrect environment - Should be 'https://sandbox.plaid.com' for testing")
-    print("3. API version mismatch - Try: pip install --upgrade plaid-python")
-    print("4. Network issue - Check internet connection")
-    print()
-    print("Full error details:")
-    print(str(e))
-    exit(1)
+    print(f"\n❌ Error testing Plaid connection: {e}")
+    print(f"   Error type: {type(e).__name__}")
+    print("\n" + "=" * 60)
+    print("❌ PLAID CONNECTION FAILED")
+    print("=" * 60)
+    print("\nPossible issues:")
+    print("1. Invalid credentials - check PLAID_CLIENT_ID and PLAID_SECRET")
+    print("2. Network connectivity issue")
+    print("3. Plaid sandbox environment issue")
+    print("4. Credentials might be for production, not sandbox")

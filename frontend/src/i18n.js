@@ -10,6 +10,8 @@ const resources = {
       "dashboard": "Financial Health Dashboard",
       "logout": "Logout",
       "backToDashboard": "Back to Dashboard",
+      "profile": "Profile",
+      "manageYourProfile": "Manage your profile and company information",
       
       // Dashboard
       "uploadData": "Upload Data",
@@ -138,6 +140,8 @@ const resources = {
       "dashboard": "वित्तीय स्वास्थ्य डैशबोर्ड",
       "logout": "लॉग आउट",
       "backToDashboard": "डैशबोर्ड पर वापस जाएं",
+      "profile": "प्रोफ़ाइल",
+      "manageYourProfile": "अपनी प्रोफ़ाइल और कंपनी की जानकारी प्रबंधित करें",
       
       // Dashboard
       "uploadData": "डेटा अपलोड करें",
@@ -266,6 +270,8 @@ const resources = {
       "dashboard": "நிதி ஆரோக்கிய டாஷ்போர்டு",
       "logout": "வெளியேறு",
       "backToDashboard": "டாஷ்போர்டுக்கு திரும்பு",
+      "profile": "சுயவிவரம்",
+      "manageYourProfile": "உங்கள் சுயவிவரம் மற்றும் நிறுவன தகவலை நிர்வகிக்கவும்",
       
       // Dashboard
       "uploadData": "தரவு பதிவேற்று",

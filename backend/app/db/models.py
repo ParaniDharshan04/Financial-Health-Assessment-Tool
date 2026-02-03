@@ -13,6 +13,18 @@ class User(Base):
     industry = Column(String)
     created_at = Column(DateTime, default=datetime.utcnow)
     
+    # Additional profile fields
+    phone = Column(String, nullable=True)
+    address = Column(Text, nullable=True)
+    city = Column(String, nullable=True)
+    state = Column(String, nullable=True)
+    pincode = Column(String, nullable=True)
+    gstin = Column(String, nullable=True)
+    pan = Column(String, nullable=True)
+    registration_date = Column(String, nullable=True)
+    company_size = Column(String, nullable=True)
+    annual_revenue = Column(String, nullable=True)
+    
     financial_data = relationship("FinancialData", back_populates="user")
     analyses = relationship("Analysis", back_populates="user")
 

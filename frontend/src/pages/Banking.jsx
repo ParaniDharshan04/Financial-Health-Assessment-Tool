@@ -41,28 +41,25 @@ export default function Banking() {
 
   const createLinkToken = async () => {
     setLoading(true)
-    showNotification('Opening Plaid Link...', 'success')
     
     try {
       const response = await axios.post('/api/banking/create-link-token')
       
       if (response.data.link_token) {
         setLinkToken(response.data.link_token)
-        showNotification('Select your bank to connect', 'success')
+        showNotification('Plaid Link ready - Select your bank to connect', 'success')
       } else if (response.data.is_demo) {
-        // Only show notification if there's an actual error
+        // Show error notification only if there's an actual error
         if (response.data.error) {
-          console.warn('Plaid configuration issue:', response.data.error)
-          showNotification('Using demo mode - Plaid not fully configured', 'error')
-        } else {
-          showNotification('Showing demo data', 'success')
+          console.error('Plaid configuration issue:', response.data.error)
+          showNotification(`Plaid Error: ${response.data.error}`, 'error')
         }
         // Fetch demo accounts
         fetchAccounts()
       }
     } catch (error) {
       console.error('Error creating link token:', error)
-      showNotification('Error connecting. Showing demo data.', 'error')
+      showNotification('Connection error. Showing demo data.', 'error')
       // Show demo data
       fetchAccounts()
     } finally {
@@ -187,7 +184,7 @@ export default function Banking() {
             <div className="space-y-4">
               <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
                 <div>
-                  <p className="text-green-400 font-semibold">✓ Connected</p>
+                  <p className="text-green-400 font-semibold">✓ Connected to Plaid</p>
                   <p className="text-gray-300 text-sm">{bankStatus.institution_name}</p>
                   {bankStatus.last_sync && (
                     <p className="text-gray-400 text-xs mt-1">
@@ -210,6 +207,9 @@ export default function Banking() {
               <p className="text-gray-300 mb-4 text-sm">
                 {t('connectBankDesc')}
               </p>
+              <p className="text-xs text-gray-500 mb-4">
+                ℹ️ Demo accounts are shown below. Click the button to connect your real bank account via Plaid.
+              </p>
               <button
                 onClick={createLinkToken}
                 disabled={loading}
@@ -228,7 +228,7 @@ export default function Banking() {
                 )}
               </button>
               <p className="text-xs text-gray-400 mt-3">
-                {t('poweredByPlaid')}
+                🔒 {t('poweredByPlaid')} - Bank-level security
               </p>
             </div>
           )}

@@ -168,11 +168,11 @@ export default function TaxCompliance() {
   const getStatusIcon = (status) => {
     switch (status) {
       case 'Compliant':
-        return <CheckCircle className="text-green-600" size={24} />
+        return <CheckCircle className="text-green-400" size={24} />
       case 'Non-compliant':
-        return <XCircle className="text-red-600" size={24} />
+        return <XCircle className="text-red-400" size={24} />
       default:
-        return <AlertTriangle className="text-yellow-600" size={24} />
+        return <AlertTriangle className="text-yellow-400" size={24} />
     }
   }
 
@@ -224,7 +224,7 @@ export default function TaxCompliance() {
                 onClick={() => setActiveTab('overview')}
                 className={`px-4 py-2 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === 'overview'
-                    ? 'border-green-500 text-green-400'
+                    ? 'border-purple-500 text-purple-400'
                     : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600'
                 }`}
               >
@@ -234,7 +234,7 @@ export default function TaxCompliance() {
                 onClick={() => setActiveTab('deductions')}
                 className={`px-4 py-2 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === 'deductions'
-                    ? 'border-green-500 text-green-400'
+                    ? 'border-purple-500 text-purple-400'
                     : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600'
                 }`}
               >
@@ -244,7 +244,7 @@ export default function TaxCompliance() {
                 onClick={() => setActiveTab('filing')}
                 className={`px-4 py-2 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === 'filing'
-                    ? 'border-green-500 text-green-400'
+                    ? 'border-purple-500 text-purple-400'
                     : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600'
                 }`}
               >
@@ -258,39 +258,43 @@ export default function TaxCompliance() {
         {activeTab === 'overview' && complianceData && (
           <div className="space-y-6">
             {/* Overall Status */}
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="metric-card">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-gray-900">{t('overallComplianceStatus')}</h2>
-                <span className={`px-4 py-2 rounded-full border-2 ${getStatusColor(complianceData.overall_status)}`}>
+                <h2 className="text-xl font-semibold text-white">{t('overallComplianceStatus')}</h2>
+                <span className={`px-4 py-2 rounded-full border-2 ${
+                  complianceData.overall_status === 'Compliant' ? 'bg-green-500/20 text-green-400 border-green-400/50' :
+                  complianceData.overall_status === 'Non-compliant' ? 'bg-red-500/20 text-red-400 border-red-400/50' :
+                  'bg-yellow-500/20 text-yellow-400 border-yellow-400/50'
+                }`}>
                   {complianceData.overall_status}
                 </span>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-3xl font-bold text-blue-600">{complianceData.compliance_score}</div>
-                  <div className="text-sm text-gray-600 mt-1">{t('complianceScore')}</div>
+                <div className="text-center p-4 bg-white/5 rounded-lg border border-white/10">
+                  <div className="text-3xl font-bold text-blue-400">{complianceData.compliance_score}</div>
+                  <div className="text-sm text-gray-400 mt-1">{t('complianceScore')}</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-3xl font-bold text-green-600">{complianceData.checks_passed}</div>
-                  <div className="text-sm text-gray-600 mt-1">{t('checksPassed')}</div>
+                <div className="text-center p-4 bg-white/5 rounded-lg border border-white/10">
+                  <div className="text-3xl font-bold text-green-400">{complianceData.checks_passed}</div>
+                  <div className="text-sm text-gray-400 mt-1">{t('checksPassed')}</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-3xl font-bold text-red-600">{complianceData.checks_failed}</div>
-                  <div className="text-sm text-gray-600 mt-1">{t('issuesFound')}</div>
+                <div className="text-center p-4 bg-white/5 rounded-lg border border-white/10">
+                  <div className="text-3xl font-bold text-red-400">{complianceData.checks_failed}</div>
+                  <div className="text-sm text-gray-400 mt-1">{t('issuesFound')}</div>
                 </div>
               </div>
             </div>
 
             {/* Compliance Checks */}
-            <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('complianceChecks')}</h2>
+            <div className="metric-card">
+              <h2 className="text-xl font-semibold text-white mb-4">{t('complianceChecks')}</h2>
               <div className="space-y-3">
                 {complianceData.checks?.map((check, index) => (
-                  <div key={index} className="flex items-start gap-3 p-4 border border-gray-200 rounded-lg">
+                  <div key={index} className="flex items-start gap-3 p-4 bg-white/5 border border-white/10 rounded-lg">
                     {getStatusIcon(check.status)}
                     <div className="flex-1">
-                      <h3 className="font-semibold text-gray-900">{check.check_name}</h3>
-                      <p className="text-sm text-gray-600 mt-1">{check.message}</p>
+                      <h3 className="font-semibold text-white">{check.check_name}</h3>
+                      <p className="text-sm text-gray-400 mt-1">{check.message}</p>
                     </div>
                   </div>
                 ))}
@@ -299,17 +303,17 @@ export default function TaxCompliance() {
 
             {/* Issues */}
             {complianceData.issues?.length > 0 && (
-              <div className="bg-white rounded-lg shadow p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('issuesToAddress')}</h2>
+              <div className="metric-card">
+                <h2 className="text-xl font-semibold text-white mb-4">{t('issuesToAddress')}</h2>
                 <div className="space-y-3">
                   {complianceData.issues.map((issue, index) => (
-                    <div key={index} className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-lg">
-                      <AlertTriangle className="text-red-600 mt-1" size={20} />
+                    <div key={index} className="flex items-start gap-3 p-4 bg-red-500/10 border border-red-400/30 rounded-lg">
+                      <AlertTriangle className="text-red-400 mt-1" size={20} />
                       <div className="flex-1">
-                        <h3 className="font-semibold text-red-900">{issue.type}</h3>
-                        <p className="text-sm text-red-700 mt-1">{issue.description}</p>
+                        <h3 className="font-semibold text-red-300">{issue.type}</h3>
+                        <p className="text-sm text-red-200 mt-1">{issue.description}</p>
                         {issue.recommendation && (
-                          <p className="text-sm text-red-600 mt-2">
+                          <p className="text-sm text-red-300 mt-2">
                             <strong>Recommendation:</strong> {issue.recommendation}
                           </p>
                         )}
@@ -399,34 +403,34 @@ export default function TaxCompliance() {
         {/* Filing Readiness Tab */}
         {activeTab === 'filing' && filingReadiness && (
           <div className="space-y-6">
-            <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">{t('filingReadinessAssessment')}</h2>
+            <div className="metric-card">
+              <h2 className="text-xl font-semibold text-white mb-6">{t('filingReadinessAssessment')}</h2>
               
               <div className="mb-6">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-gray-700">{t('readinessScore')}</span>
-                  <span className="text-sm font-medium text-gray-900">{filingReadiness.readiness_score}%</span>
+                  <span className="text-sm font-medium text-gray-300">{t('readinessScore')}</span>
+                  <span className="text-sm font-medium text-white">{filingReadiness.readiness_score}%</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-3">
+                <div className="w-full bg-white/10 rounded-full h-3">
                   <div
                     className={`h-3 rounded-full ${
-                      filingReadiness.readiness_score >= 80 ? 'bg-green-600' :
-                      filingReadiness.readiness_score >= 50 ? 'bg-yellow-600' : 'bg-red-600'
+                      filingReadiness.readiness_score >= 80 ? 'bg-green-400' :
+                      filingReadiness.readiness_score >= 50 ? 'bg-yellow-400' : 'bg-red-400'
                     }`}
                     style={{ width: `${filingReadiness.readiness_score}%` }}
                   ></div>
                 </div>
-                <p className="text-sm text-gray-600 mt-2">{filingReadiness.status}</p>
+                <p className="text-sm text-gray-400 mt-2">{filingReadiness.status}</p>
               </div>
 
               {/* Missing Items */}
               {filingReadiness.missing_items?.length > 0 && (
                 <div className="mb-6">
-                  <h3 className="font-semibold text-gray-900 mb-3">{t('missingItems')}</h3>
+                  <h3 className="font-semibold text-white mb-3">{t('missingItems')}</h3>
                   <div className="space-y-2">
                     {filingReadiness.missing_items.map((item, index) => (
-                      <div key={index} className="flex items-center gap-2 text-sm text-gray-700">
-                        <XCircle size={16} className="text-red-600" />
+                      <div key={index} className="flex items-center gap-2 text-sm text-gray-300">
+                        <XCircle size={16} className="text-red-400" />
                         {item}
                       </div>
                     ))}
@@ -437,12 +441,12 @@ export default function TaxCompliance() {
               {/* Recommendations */}
               {filingReadiness.recommendations?.length > 0 && (
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-3">{t('recommendations')}</h3>
+                  <h3 className="font-semibold text-white mb-3">{t('recommendations')}</h3>
                   <div className="space-y-2">
                     {filingReadiness.recommendations.map((rec, index) => (
-                      <div key={index} className="flex items-start gap-2 p-3 bg-blue-50 rounded-lg">
-                        <CheckCircle size={16} className="text-blue-600 mt-0.5" />
-                        <span className="text-sm text-gray-700">{rec}</span>
+                      <div key={index} className="flex items-start gap-2 p-3 bg-blue-500/10 border border-blue-400/30 rounded-lg">
+                        <CheckCircle size={16} className="text-blue-400 mt-0.5" />
+                        <span className="text-sm text-gray-300">{rec}</span>
                       </div>
                     ))}
                   </div>

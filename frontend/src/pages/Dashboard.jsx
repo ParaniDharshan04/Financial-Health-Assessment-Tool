@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
-import { TrendingUp, Upload, FileText, LogOut, FileCheck, Building2, Receipt } from 'lucide-react'
+import { TrendingUp, Upload, FileText, LogOut, FileCheck, Building2, Receipt, User } from 'lucide-react'
 import LanguageSelector from '../components/LanguageSelector'
 
 export default function Dashboard() {
@@ -67,6 +67,13 @@ export default function Dashboard() {
             </div>
             <div className="flex items-center gap-4">
               <LanguageSelector />
+              <button
+                onClick={() => navigate('/profile')}
+                className="flex items-center gap-2 px-4 py-2 text-gray-300 hover:text-white transition-colors"
+              >
+                <User size={20} />
+                {t('profile')}
+              </button>
               <button
                 onClick={logout}
                 className="flex items-center gap-2 px-4 py-2 text-gray-300 hover:text-white transition-colors"

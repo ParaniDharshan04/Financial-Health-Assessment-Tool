@@ -9,36 +9,44 @@ from plaid.model.item_public_token_exchange_request import ItemPublicTokenExchan
 from plaid import ApiClient, Configuration
 from typing import Dict, List, Optional
 from datetime import datetime, timedelta
-import os
+from app.core.config import settings
 
 class PlaidIntegration:
     """Integration with Plaid API for banking data"""
     
     def __init__(self):
-        # Get Plaid credentials
-        self.client_id = os.getenv('PLAID_CLIENT_ID', '').strip()
-        self.secret = os.getenv('PLAID_SECRET', '').strip()
-        self.env = os.getenv('PLAID_ENV', 'https://sandbox.plaid.com').strip()
+        # Get Plaid credentials from settings
+        self.client_id = (settings.PLAID_CLIENT_ID or '').strip()
+        self.secret = (settings.PLAID_SECRET or '').strip()
+        self.env = (settings.PLAID_ENV or 'https://sandbox.plaid.com').strip()
         
         # Check if Plaid is configured
         self.is_configured = bool(self.client_id and self.secret and len(self.client_id) > 10)
         
         if not self.is_configured:
             print("⚠️  Plaid not configured - missing CLIENT_ID or SECRET")
+            print(f"   CLIENT_ID length: {len(self.client_id)}")
+            print(f"   SECRET length: {len(self.secret)}")
             return
         
-        # Configure Plaid client
-        configuration = Configuration(
-            host=self.env,
-            api_key={
-                'clientId': self.client_id,
-                'secret': self.secret,
-            }
-        )
-        
-        api_client = ApiClient(configuration)
-        self.client = plaid_api.PlaidApi(api_client)
-        print(f"✅ Plaid configured - Environment: {self.env}")
+        try:
+            # Configure Plaid client
+            configuration = Configuration(
+                host=self.env,
+                api_key={
+                    'clientId': self.client_id,
+                    'secret': self.secret,
+                }
+            )
+            
+            api_client = ApiClient(configuration)
+            self.client = plaid_api.PlaidApi(api_client)
+            print(f"✅ Plaid configured successfully")
+            print(f"   Environment: {self.env}")
+            print(f"   Client ID: {self.client_id[:10]}...")
+        except Exception as e:
+            print(f"❌ Error configuring Plaid client: {e}")
+            self.is_configured = False
     
     def create_link_token(self, user_id: int, user_email: str) -> Dict:
         """Create a link token for Plaid Link"""
@@ -57,7 +65,7 @@ class PlaidIntegration:
                 ),
                 client_name="SME Financial Platform",
                 products=[Products("transactions"), Products("auth")],
-                country_codes=[CountryCode("US"), CountryCode("IN")],
+                country_codes=[CountryCode("US")],  # Only US for sandbox
                 language="en",
                 webhook="https://your-domain.com/api/banking/webhook",  # Update with your domain
             )
