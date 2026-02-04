@@ -5,11 +5,14 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Copy everything to the container
-COPY . .
+COPY . /app/
+
+# Debug: List files to verify copy worked
+RUN ls -la /app/
 
 # Install dependencies
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+    pip install --no-cache-dir -r /app/requirements.txt
 
 # Expose port
 EXPOSE 8000
