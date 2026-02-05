@@ -15,8 +15,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "http://localhost:5173",
-        "https://*.vercel.app",  # Allow all Vercel deployments
-        "*"  # Allow all origins (for production, replace with your specific Vercel URL)
+        "https://financial-health-assessment-tool-tan.vercel.app",
+        "*"  # Allow all origins for development
     ],
     allow_credentials=True,
     allow_methods=["*"],
