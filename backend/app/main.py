@@ -2,12 +2,25 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api import auth, financial_data, analysis, reports, banking, tax, gst, optimization, bookkeeping
 from app.core.config import settings
+from app.db.database import engine, Base
+from app.db import models
 
 app = FastAPI(
     title="SME Financial Health Assessment API",
     description="AI-powered financial intelligence platform for SMEs",
     version="1.0.0"
 )
+
+@app.on_event("startup")
+async def startup_event():
+    """Initialize database tables on startup"""
+    try:
+        print("🔄 Initializing database tables...")
+        Base.metadata.create_all(bind=engine)
+        print("✅ Database tables initialized successfully!")
+    except Exception as e:
+        print(f"⚠️ Database initialization warning: {str(e)}")
+        # Don't fail startup, just log the error
 
 # CORS configuration
 app.add_middleware(
