@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react'
-import api from '../config'
+import axios from 'axios'
+import '../config' // Import to configure axios defaults
 
 const AuthContext = createContext()
 
@@ -14,7 +15,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     if (token) {
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
       const userData = JSON.parse(localStorage.getItem('user') || '{}')
       setUser(userData)
     }
@@ -22,20 +23,20 @@ export function AuthProvider({ children }) {
   }, [token])
 
   const login = async (email, password) => {
-    const response = await api.post('/api/auth/login', { email, password })
+    const response = await axios.post('/api/auth/login', { email, password })
     const { access_token, user: userData } = response.data
     
     localStorage.setItem('token', access_token)
     localStorage.setItem('user', JSON.stringify(userData))
     setToken(access_token)
     setUser(userData)
-    api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
+    axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
     
     return userData
   }
 
   const register = async (email, password, company_name, industry) => {
-    const response = await api.post('/api/auth/register', {
+    const response = await axios.post('/api/auth/register', {
       email,
       password,
       company_name,
@@ -47,7 +48,7 @@ export function AuthProvider({ children }) {
     localStorage.setItem('user', JSON.stringify(userData))
     setToken(access_token)
     setUser(userData)
-    api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
+    axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
     
     return userData
   }
@@ -57,7 +58,7 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('user')
     setToken(null)
     setUser(null)
-    delete api.defaults.headers.common['Authorization']
+    delete axios.defaults.headers.common['Authorization']
   }
 
   const updateUser = (userData) => {

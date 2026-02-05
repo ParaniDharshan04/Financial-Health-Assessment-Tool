@@ -1,14 +1,9 @@
 // API Configuration
 export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 
-// Export axios instance with base URL
+// Configure axios defaults globally
 import axios from 'axios'
 
-const api = axios.create({
-  baseURL: API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-})
+axios.defaults.baseURL = API_URL
 
-export default api
+export default axios
