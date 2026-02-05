@@ -104,43 +104,60 @@ def normalize_financial_data(df: pd.DataFrame, data_type: str) -> dict:
     
     normalized = {}
     
+    # Get the latest row (most recent data)
+    latest = df.iloc[-1] if len(df) > 0 else pd.Series()
+    
     if data_type == "profit_loss":
         normalized = {
-            'revenue': float(df.get('revenue', df.get('sales', pd.Series([0]))).sum()),
-            'cost_of_goods_sold': float(df.get('cogs', df.get('cost_of_goods_sold', pd.Series([0]))).sum()),
-            'gross_profit': float(df.get('gross_profit', pd.Series([0])).sum()),
-            'operating_expenses': float(df.get('operating_expenses', df.get('opex', pd.Series([0]))).sum()),
-            'operating_profit': float(df.get('operating_profit', df.get('ebit', pd.Series([0]))).sum()),
-            'net_profit': float(df.get('net_profit', df.get('net_income', pd.Series([0]))).sum()),
-            'ebit': float(df.get('ebit', df.get('operating_profit', pd.Series([0]))).sum()),
-            'interest_expense': float(df.get('interest_expense', pd.Series([0])).sum()),
+            'revenue': float(latest.get('revenue', 0)),
+            'cost_of_goods_sold': float(latest.get('cost_of_goods_sold', 0)),
+            'gross_profit': float(latest.get('gross_profit', 0)),
+            'operating_expenses': float(latest.get('operating_expenses', 0)),
+            'operating_profit': float(latest.get('operating_profit', 0)),
+            'net_profit': float(latest.get('net_profit', 0)),
+            'ebit': float(latest.get('ebit', 0)),
+            'ebitda': float(latest.get('ebitda', 0)),
+            'interest_expense': float(latest.get('interest_expense', 0)),
+            'depreciation': float(latest.get('depreciation', 0)),
         }
         
         # Calculate if not provided
-        if normalized['gross_profit'] == 0:
+        if normalized['gross_profit'] == 0 and normalized['revenue'] > 0:
             normalized['gross_profit'] = normalized['revenue'] - normalized['cost_of_goods_sold']
+        if normalized['ebit'] == 0 and normalized['operating_profit'] > 0:
+            normalized['ebit'] = normalized['operating_profit']
         
     elif data_type == "balance_sheet":
         normalized = {
-            'current_assets': float(df.get('current_assets', pd.Series([0])).sum()),
-            'cash': float(df.get('cash', df.get('cash_and_equivalents', pd.Series([0]))).sum()),
-            'inventory': float(df.get('inventory', pd.Series([0])).sum()),
-            'current_liabilities': float(df.get('current_liabilities', pd.Series([0])).sum()),
-            'total_assets': float(df.get('total_assets', pd.Series([0])).sum()),
-            'total_debt': float(df.get('total_debt', df.get('total_liabilities', pd.Series([0]))).sum()),
-            'equity': float(df.get('equity', df.get('shareholders_equity', pd.Series([0]))).sum()),
+            'current_assets': float(latest.get('current_assets', 0)),
+            'cash': float(latest.get('cash', 0)),
+            'inventory': float(latest.get('inventory', 0)),
+            'accounts_receivable': float(latest.get('accounts_receivable', 0)),
+            'current_liabilities': float(latest.get('current_liabilities', 0)),
+            'accounts_payable': float(latest.get('accounts_payable', 0)),
+            'total_assets': float(latest.get('total_assets', 0)),
+            'fixed_assets': float(latest.get('fixed_assets', 0)),
+            'total_debt': float(latest.get('long_term_debt', 0)),
+            'total_liabilities': float(latest.get('total_liabilities', 0)),
+            'equity': float(latest.get('equity', 0)),
+            'operating_cash_flow': float(latest.get('operating_cash_flow', 0)),
+            'investing_cash_flow': float(latest.get('investing_cash_flow', 0)),
+            'financing_cash_flow': float(latest.get('financing_cash_flow', 0)),
         }
         
     elif data_type == "cash_flow":
         normalized = {
-            'operating_cash_flow': float(df.get('operating_cash_flow', df.get('ocf', pd.Series([0]))).sum()),
-            'investing_cash_flow': float(df.get('investing_cash_flow', pd.Series([0])).sum()),
-            'financing_cash_flow': float(df.get('financing_cash_flow', pd.Series([0])).sum()),
-            'net_cash_flow': float(df.get('net_cash_flow', pd.Series([0])).sum()),
-            'receivables_days': float(df.get('receivables_days', pd.Series([45])).mean()),
-            'payables_days': float(df.get('payables_days', pd.Series([30])).mean()),
-            'inventory_days': float(df.get('inventory_days', pd.Series([30])).mean()),
+            'operating_cash_flow': float(latest.get('operating_cash_flow', 0)),
+            'investing_cash_flow': float(latest.get('investing_cash_flow', 0)),
+            'financing_cash_flow': float(latest.get('financing_cash_flow', 0)),
+            'net_cash_flow': float(latest.get('net_cash_flow', 0)),
+            'receivables_days': float(latest.get('receivables_days', 45)),
+            'payables_days': float(latest.get('payables_days', 30)),
+            'inventory_days': float(latest.get('inventory_days', 30)),
         }
+    
+    # Remove zero values to avoid division errors
+    normalized = {k: v for k, v in normalized.items() if v != 0 or k in ['receivables_days', 'payables_days', 'inventory_days']}
     
     return normalized
 

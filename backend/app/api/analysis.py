@@ -30,8 +30,27 @@ def create_analysis(
     if not financial_data:
         raise HTTPException(status_code=404, detail="Financial data not found")
     
-    # Combine normalized data
-    combined_data = financial_data.normalized_data
+    # Get all user's financial data to combine
+    all_user_data = db.query(models.FinancialData).filter(
+        models.FinancialData.user_id == current_user.id
+    ).order_by(models.FinancialData.upload_date.desc()).limit(10).all()
+    
+    # Combine normalized data from all sources
+    combined_data = {}
+    for data in all_user_data:
+        if data.normalized_data:
+            combined_data.update(data.normalized_data)
+    
+    # Ensure we have the primary data
+    if financial_data.normalized_data:
+        combined_data.update(financial_data.normalized_data)
+    
+    # Validate we have minimum required data
+    if not combined_data.get('revenue') and not combined_data.get('current_assets'):
+        raise HTTPException(
+            status_code=400, 
+            detail="Insufficient financial data. Please upload both Profit & Loss and Balance Sheet data."
+        )
     
     # Run financial analysis
     analyzer = FinancialAnalyzer(combined_data)
