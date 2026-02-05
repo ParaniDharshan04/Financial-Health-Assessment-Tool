@@ -163,9 +163,9 @@ API Docs: http://localhost:8000/docs
 
 ### Required API Keys
 
-1. **Google Gemini API** (for AI insights)
-   - Get from: https://makersuite.google.com/app/apikey
-   - Add to `backend/.env`: `GEMINI_API_KEY=your-key-here`
+1. **OpenAI ChatGPT API** (for AI insights)
+   - Get from: https://platform.openai.com/api-keys
+   - Add to `backend/.env`: `OPENAI_API_KEY=your-key-here`
 
 2. **Plaid API** (for banking integration - optional)
    - Sign up: https://dashboard.plaid.com/signup
@@ -354,7 +354,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- Google Gemini for AI capabilities
+- OpenAI ChatGPT for AI capabilities
 - Plaid for banking integration
 - FastAPI for excellent API framework
 - React team for frontend framework
