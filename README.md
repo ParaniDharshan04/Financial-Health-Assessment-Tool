@@ -12,7 +12,7 @@ A comprehensive AI-powered financial health assessment platform for Small and Me
 ## � Key Features
 
 ### Core Functionality
-- **AI-Powered Financial Analysis** - Comprehensive analysis using Google Gemini 2.0 Flash
+- **AI-Powered Financial Analysis** - Comprehensive analysis using ChatGPT 5
 - **Credit Assessment** - Evaluate creditworthiness and loan eligibility
 - **Risk Identification** - Identify financial risks and vulnerabilities
 - **Cost Optimization** - Suggest strategies to reduce costs and improve margins
