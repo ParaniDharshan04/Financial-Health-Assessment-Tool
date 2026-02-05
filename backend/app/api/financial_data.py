@@ -107,57 +107,50 @@ def normalize_financial_data(df: pd.DataFrame, data_type: str) -> dict:
     # Get the latest row (most recent data)
     latest = df.iloc[-1] if len(df) > 0 else pd.Series()
     
-    if data_type == "profit_loss":
-        normalized = {
-            'revenue': float(latest.get('revenue', 0)),
-            'cost_of_goods_sold': float(latest.get('cost_of_goods_sold', 0)),
-            'gross_profit': float(latest.get('gross_profit', 0)),
-            'operating_expenses': float(latest.get('operating_expenses', 0)),
-            'operating_profit': float(latest.get('operating_profit', 0)),
-            'net_profit': float(latest.get('net_profit', 0)),
-            'ebit': float(latest.get('ebit', 0)),
-            'ebitda': float(latest.get('ebitda', 0)),
-            'interest_expense': float(latest.get('interest_expense', 0)),
-            'depreciation': float(latest.get('depreciation', 0)),
-        }
-        
-        # Calculate if not provided
-        if normalized['gross_profit'] == 0 and normalized['revenue'] > 0:
-            normalized['gross_profit'] = normalized['revenue'] - normalized['cost_of_goods_sold']
-        if normalized['ebit'] == 0 and normalized['operating_profit'] > 0:
-            normalized['ebit'] = normalized['operating_profit']
-        
-    elif data_type == "balance_sheet":
-        normalized = {
-            'current_assets': float(latest.get('current_assets', 0)),
-            'cash': float(latest.get('cash', 0)),
-            'inventory': float(latest.get('inventory', 0)),
-            'accounts_receivable': float(latest.get('accounts_receivable', 0)),
-            'current_liabilities': float(latest.get('current_liabilities', 0)),
-            'accounts_payable': float(latest.get('accounts_payable', 0)),
-            'total_assets': float(latest.get('total_assets', 0)),
-            'fixed_assets': float(latest.get('fixed_assets', 0)),
-            'total_debt': float(latest.get('long_term_debt', 0)),
-            'total_liabilities': float(latest.get('total_liabilities', 0)),
-            'equity': float(latest.get('equity', 0)),
-            'operating_cash_flow': float(latest.get('operating_cash_flow', 0)),
-            'investing_cash_flow': float(latest.get('investing_cash_flow', 0)),
-            'financing_cash_flow': float(latest.get('financing_cash_flow', 0)),
-        }
-        
-    elif data_type == "cash_flow":
-        normalized = {
-            'operating_cash_flow': float(latest.get('operating_cash_flow', 0)),
-            'investing_cash_flow': float(latest.get('investing_cash_flow', 0)),
-            'financing_cash_flow': float(latest.get('financing_cash_flow', 0)),
-            'net_cash_flow': float(latest.get('net_cash_flow', 0)),
-            'receivables_days': float(latest.get('receivables_days', 45)),
-            'payables_days': float(latest.get('payables_days', 30)),
-            'inventory_days': float(latest.get('inventory_days', 30)),
-        }
+    # Try to extract all possible fields regardless of data_type
+    # This allows for combined financial statements
+    all_fields = {
+        # P&L fields
+        'revenue': float(latest.get('revenue', 0)),
+        'cost_of_goods_sold': float(latest.get('cost_of_goods_sold', 0)),
+        'gross_profit': float(latest.get('gross_profit', 0)),
+        'operating_expenses': float(latest.get('operating_expenses', 0)),
+        'operating_profit': float(latest.get('operating_profit', 0)),
+        'net_profit': float(latest.get('net_profit', 0)),
+        'ebit': float(latest.get('ebit', 0)),
+        'ebitda': float(latest.get('ebitda', 0)),
+        'interest_expense': float(latest.get('interest_expense', 0)),
+        'depreciation': float(latest.get('depreciation', 0)),
+        # Balance Sheet fields
+        'current_assets': float(latest.get('current_assets', 0)),
+        'cash': float(latest.get('cash', 0)),
+        'inventory': float(latest.get('inventory', 0)),
+        'accounts_receivable': float(latest.get('accounts_receivable', 0)),
+        'current_liabilities': float(latest.get('current_liabilities', 0)),
+        'accounts_payable': float(latest.get('accounts_payable', 0)),
+        'total_assets': float(latest.get('total_assets', 0)),
+        'fixed_assets': float(latest.get('fixed_assets', 0)),
+        'total_debt': float(latest.get('long_term_debt', 0)),
+        'total_liabilities': float(latest.get('total_liabilities', 0)),
+        'equity': float(latest.get('equity', 0)),
+        # Cash Flow fields
+        'operating_cash_flow': float(latest.get('operating_cash_flow', 0)),
+        'investing_cash_flow': float(latest.get('investing_cash_flow', 0)),
+        'financing_cash_flow': float(latest.get('financing_cash_flow', 0)),
+        'receivables_days': float(latest.get('receivables_days', 45)),
+        'payables_days': float(latest.get('payables_days', 30)),
+        'inventory_days': float(latest.get('inventory_days', 30)),
+    }
     
-    # Remove zero values to avoid division errors
-    normalized = {k: v for k, v in normalized.items() if v != 0 or k in ['receivables_days', 'payables_days', 'inventory_days']}
+    # Only include non-zero values (except for days which can be zero)
+    normalized = {k: v for k, v in all_fields.items() if v != 0 or k in ['receivables_days', 'payables_days', 'inventory_days']}
+    
+    # Calculate derived fields if not provided
+    if 'gross_profit' not in normalized and normalized.get('revenue', 0) > 0:
+        normalized['gross_profit'] = normalized.get('revenue', 0) - normalized.get('cost_of_goods_sold', 0)
+    
+    if 'ebit' not in normalized and normalized.get('operating_profit', 0) > 0:
+        normalized['ebit'] = normalized['operating_profit']
     
     return normalized
 
