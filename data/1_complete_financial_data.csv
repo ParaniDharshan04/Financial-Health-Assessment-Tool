@@ -1,23 +1,43 @@
 Category,Item,Amount,Date,Description,Tax_Deductible,GST_Rate
-Revenue,Sales Revenue,8500000,2024-04-30,Product Sales - Q4,No,18%
-Revenue,Service Income,1200000,2024-04-30,Consulting Services,No,18%
-Revenue,Export Revenue,500000,2024-04-30,International Sales,No,0%
-Expenses,Raw Materials,3500000,2024-04-30,Manufacturing Materials,Yes,18%
-Expenses,Employee Salaries,1800000,2024-04-30,Staff Salaries,Yes,0%
-Expenses,Rent,480000,2024-04-30,Office Rent,Yes,18%
-Expenses,Utilities,120000,2024-04-30,Electricity & Water,Yes,18%
-Expenses,Professional Fees,250000,2024-04-30,CA & Legal Fees,Yes,18%
-Expenses,Marketing,180000,2024-04-30,Advertising,Yes,18%
-Expenses,Insurance,90000,2024-04-30,Business Insurance,Yes,18%
-Expenses,Depreciation,320000,2024-04-30,Asset Depreciation,Yes,0%
-Expenses,Interest on Loan,200000,2024-04-30,Business Loan Interest,Yes,0%
-Tax_Payments,TDS on Salaries,125000,2024-04-20,Tax Deducted at Source,No,0%
-Tax_Payments,Advance Income Tax,180000,2024-04-15,Advance Tax Q4,No,0%
-Tax_Payments,GST Paid,540000,2024-04-20,GST Payment,No,0%
-Tax_Payments,Professional Tax,12000,2024-04-30,Professional Tax,No,0%
-Assets,Fixed Assets,2500000,2024-04-30,Machinery & Equipment,No,0%
-Assets,Current Assets,1800000,2024-04-30,Inventory & Receivables,No,0%
-Assets,Cash & Bank,750000,2024-04-30,Liquid Assets,No,0%
-Liabilities,Business Loan,1200000,2024-04-30,Term Loan,No,0%
-Liabilities,Creditors,650000,2024-04-30,Trade Payables,No,0%
-Liabilities,GST Payable,112085,2024-04-30,Net GST Liability,No,0%
+Revenue,Sales Revenue,12500000,2024-12-31,Product Sales - Annual,No,18%
+Revenue,Service Income,3200000,2024-12-31,Consulting & Professional Services,No,18%
+Revenue,Export Revenue,1800000,2024-12-31,International Sales,No,0%
+Revenue,Other Income,250000,2024-12-31,Interest & Miscellaneous,No,0%
+Expenses,Raw Materials,5200000,2024-12-31,Manufacturing Materials & Supplies,Yes,18%
+Expenses,Employee Salaries,3600000,2024-12-31,Staff Salaries & Wages,Yes,0%
+Expenses,Rent,720000,2024-12-31,Office & Factory Rent,Yes,18%
+Expenses,Utilities,180000,2024-12-31,Electricity Water & Internet,Yes,18%
+Expenses,Professional Fees,420000,2024-12-31,CA Legal & Consulting Fees,Yes,18%
+Expenses,Marketing,450000,2024-12-31,Advertising & Promotion,Yes,18%
+Expenses,Insurance,150000,2024-12-31,Business & Asset Insurance,Yes,18%
+Expenses,Depreciation,480000,2024-12-31,Asset Depreciation,Yes,0%
+Expenses,Interest on Loan,320000,2024-12-31,Business Loan Interest,Yes,0%
+Expenses,Transportation,280000,2024-12-31,Logistics & Delivery,Yes,18%
+Expenses,Maintenance,190000,2024-12-31,Equipment & Facility Maintenance,Yes,18%
+Expenses,Office Supplies,95000,2024-12-31,Stationery & Consumables,Yes,18%
+Tax_Payments,TDS on Salaries,180000,2024-12-20,Tax Deducted at Source,No,0%
+Tax_Payments,Advance Income Tax,420000,2024-12-15,Advance Tax Payment,No,0%
+Tax_Payments,GST Paid,1240000,2024-12-20,GST Payment to Government,No,0%
+Tax_Payments,Professional Tax,24000,2024-12-31,Professional Tax,No,0%
+Assets,Fixed Assets,4500000,2024-12-31,Machinery Equipment & Vehicles,No,0%
+Assets,Current Assets,3850000,2024-12-31,Inventory & Receivables,No,0%
+Assets,Cash & Bank,1250000,2024-12-31,Liquid Cash & Bank Balance,No,0%
+Assets,Investments,800000,2024-12-31,Short-term Investments,No,0%
+Assets,Accounts Receivable,1850000,2024-12-31,Trade Receivables,No,0%
+Assets,Inventory,1200000,2024-12-31,Stock on Hand,No,0%
+Liabilities,Business Loan,2400000,2024-12-31,Term Loan Outstanding,No,0%
+Liabilities,Creditors,980000,2024-12-31,Trade Payables,No,0%
+Liabilities,GST Payable,185000,2024-12-31,Net GST Liability,No,0%
+Liabilities,Other Current Liabilities,420000,2024-12-31,Accrued Expenses,No,0%
+Equity,Share Capital,3000000,2024-12-31,Paid-up Capital,No,0%
+Equity,Retained Earnings,2415000,2024-12-31,Accumulated Profits,No,0%
+Cash_Flow,Operating Cash Flow,2850000,2024-12-31,Cash from Operations,No,0%
+Cash_Flow,Investing Cash Flow,-650000,2024-12-31,Capital Expenditure,No,0%
+Cash_Flow,Financing Cash Flow,-420000,2024-12-31,Loan Repayment & Dividends,No,0%
+Performance,Gross Profit,7350000,2024-12-31,Revenue minus COGS,No,0%
+Performance,Operating Profit,3200000,2024-12-31,EBIT,No,0%
+Performance,Net Profit,2880000,2024-12-31,Profit After Tax,No,0%
+Performance,EBITDA,3680000,2024-12-31,Earnings Before Interest Tax Depreciation Amortization,No,0%
+Working_Capital,Receivables Days,45,2024-12-31,Average Collection Period,No,0%
+Working_Capital,Payables Days,35,2024-12-31,Average Payment Period,No,0%
+Working_Capital,Inventory Days,28,2024-12-31,Inventory Turnover Days,No,0%

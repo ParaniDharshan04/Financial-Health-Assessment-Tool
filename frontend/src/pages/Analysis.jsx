@@ -331,7 +331,7 @@ export default function Analysis() {
             <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('industryBenchmarking')}</h2>
             <div className="mb-4">
               <span className="text-sm text-gray-600">{t('industry')}: </span>
-              <span className="font-semibold">{analysis.industry_comparison.industry}</span>
+              <span className="font-semibold text-gray-900">{analysis.industry_comparison.industry}</span>
               <span className="ml-4 text-sm text-gray-600">{t('performance')}: </span>
               <span className={`font-semibold ${
                 analysis.industry_comparison.overall_performance === 'Strong' ? 'text-green-600' :
